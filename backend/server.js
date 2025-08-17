@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const { testConnection, initializeDatabase, closePool } = require('./config/database');
 const userRoutes = require('./routes/users');
-const errorHandler = require('./middleware/errorHandler');
+const { errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
 const PORT = process.env.PORT || 5000;

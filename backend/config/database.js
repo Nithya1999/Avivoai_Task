@@ -36,9 +36,9 @@ const initializeDatabase = async () => {
   try {
     const connection = await pool.getConnection();
     
-    // Create database if it doesn't exist
-    await connection.execute(`CREATE DATABASE IF NOT EXISTS \`${process.env.DB_NAME}\``);
-    await connection.execute(`USE \`${process.env.DB_NAME}\``);
+    // Create database if it doesn't exist (use query instead of execute for DDL)
+    await connection.query(`CREATE DATABASE IF NOT EXISTS \`${process.env.DB_NAME}\``);
+    await connection.query(`USE \`${process.env.DB_NAME}\``);
     
     // Create users table with comprehensive schema matching DummyJSON structure
     const createUsersTable = `
@@ -107,7 +107,7 @@ const initializeDatabase = async () => {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `;
     
-    await connection.execute(createUsersTable);
+    await connection.query(createUsersTable);
     console.log('✅ Users table created or verified successfully');
     
     connection.release();
