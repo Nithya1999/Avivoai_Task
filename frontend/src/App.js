@@ -126,7 +126,7 @@ function App() {
               bgGradient="linear(to-r, blue.400, purple.500)"
               bgClip="text"
             >
-              User Management System
+              User List
             </Heading>
             
             <HStack spacing={4} w="100%" justify="space-between" flexWrap="wrap">

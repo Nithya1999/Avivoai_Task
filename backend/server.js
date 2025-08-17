@@ -90,9 +90,6 @@ app.use('*', (req, res) => {
   });
 });
 
-// Error handling middleware (must be last)
-// app.use(errorHandler);
-
 // Initialize database and start server
 const startServer = async () => {
   try {
