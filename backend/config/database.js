@@ -6,7 +6,7 @@ const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
   port: process.env.DB_PORT || 3306,
   user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
+  password: process.env.DB_PASSWORD || 'nithya',
   database: process.env.DB_NAME || 'user_management',
   waitForConnections: true,
   connectionLimit: 10,
@@ -36,9 +36,9 @@ const initializeDatabase = async () => {
   try {
     const connection = await pool.getConnection();
     
-    // Create database if it doesn't exist (use query instead of execute for DDL)
-    await connection.query(`CREATE DATABASE IF NOT EXISTS \`${process.env.DB_NAME}\``);
-    await connection.query(`USE \`${process.env.DB_NAME}\``);
+    // Create database if it doesn't exist
+    await connection.execute(`CREATE DATABASE IF NOT EXISTS \`${dbConfig.database}\``);
+    // await connection.execute(`USE \`${dbConfig.database}\``);
     
     // Create users table with comprehensive schema matching DummyJSON structure
     const createUsersTable = `
@@ -107,7 +107,7 @@ const initializeDatabase = async () => {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `;
     
-    await connection.query(createUsersTable);
+    await connection.execute(createUsersTable);
     console.log('✅ Users table created or verified successfully');
     
     connection.release();

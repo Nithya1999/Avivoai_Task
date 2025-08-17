@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const { testConnection, initializeDatabase, closePool } = require('./config/database');
 const userRoutes = require('./routes/users');
-const { errorHandler } = require('./middleware/errorHandler');
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -91,7 +91,7 @@ app.use('*', (req, res) => {
 });
 
 // Error handling middleware (must be last)
-app.use(errorHandler);
+// app.use(errorHandler);
 
 // Initialize database and start server
 const startServer = async () => {
